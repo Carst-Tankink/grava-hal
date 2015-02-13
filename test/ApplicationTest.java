@@ -9,8 +9,7 @@ import static org.fest.assertions.Assertions.*;
 
 /**
 *
-* Simple (JUnit) tests that can call all parts of a play app.
-* If you are interested in mocking a whole application, see the wiki for more details.
+* Unit tests for the game.
 *
 */
 public class ApplicationTest {
@@ -22,13 +21,6 @@ public class ApplicationTest {
       assertThat(game.getPlayerTwo()).isEqualTo("Bob");
       
       assertThat(game.getActivePlayer()).isEqualTo("Alice");
-    }
-    
-    @Test
-    public void renderTemplate() {
-      Content html = views.html.index.render("Your new application is ready.");
-      assertThat(contentType(html)).isEqualTo("text/html");
-      assertThat(contentAsString(html)).contains("Your new application is ready.");
     }
 
 
