@@ -10,14 +10,14 @@ public class GravaHal {
   }
   
   public String getPlayerOne() { 
-    return ""; 
+    return _playerOne; 
   }
   
   public String getPlayerTwo() { 
-    return "";
+    return _playerTwo;
   }
   
   public String getActivePlayer() { 
-    return ""; 
+    return _playerOne; 
   }
 }
