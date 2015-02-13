@@ -1,0 +1,13 @@
+Some features for consideration:
+
+- Board and game mechanics are required.
+
+-Players, can be added iteratively:
+  - Players in same browser: easiest
+  - Players across browsers: nice
+  - Accounts, previous games (leaderboard): also nice
+  - Spectators
+
+- Run more than one game on server
+- Game logs
+- Persistence is almost free with Play (I'll use in-memory for easy development here)
