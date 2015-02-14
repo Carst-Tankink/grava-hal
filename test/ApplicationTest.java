@@ -22,6 +22,4 @@ public class ApplicationTest {
       
       assertThat(game.getActivePlayer()).isEqualTo("Alice");
     }
-
-
 }
