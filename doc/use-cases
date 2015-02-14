@@ -1,0 +1,31 @@
+= Game =
+* Create game
+  * Players
+    * Done, with player names (Strings).
+    * Needs integration test
+  * Board
+    * Todo: test and build
+* Display game
+  * TODO. Has view at server/game/*id
+
+* Gameplay
+  * TODO
+
+* End condition
+  * TODO
+
+= Player profiles =
+(Nice to have)
+* Factor players into class
+  * Persistence + leaderboard
+* 'Authentication'/Cookies
+
+= Spectator =
+(Nice to have)
+* Allow players to watch games in progress
+* Might be for free with profiles.
+
+= Moves =
+(Nice to have)
+* Store moves per game in db.
+* Turn-end push of server to browser
