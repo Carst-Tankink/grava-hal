@@ -1,7 +1,11 @@
-@(message: String)
-
-@main("Welcome to Play") {
-
-    @play20.welcome(message, style = "Java")
-
+@main("Grava Hal") {
+  <form method="POST" action="@routes.Application.startGravaHal()">
+    <label for="playerOne">Player one:</label>
+    <input type="text" name="playerOne"/><br/>
+    
+    <label for="playerTwo">Player two:</label>
+    <input type="text" name="playerTwo"/><br/>
+    
+    <button>Start game</button>
+  </form>
 }
