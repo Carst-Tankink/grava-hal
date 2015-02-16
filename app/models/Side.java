@@ -33,25 +33,59 @@ public class Side extends Model {
     return title;
   }  
   
-  /** Iterator over the pits of this side.
-   * 
+  /** 
+   * Iterator over the pits of this side.
    * @return The pits of this side, as an iterator
    */
   public Iterator<RegularPit> getPits() {
     return pits.iterator();
   }
   
+  /** Getter for this side's Grava Hal
+   * 
+   * @return The Grava Hal
+   */
   public GravaHalPit getGravaHalPit() {
     return gravaHalPit;
   }
+  
+  
+  private int sow(int hand, Pit pit) {
+    pit.putStone();
+    return hand - 1;
+  }
+  /**
+   * Make a play starting at the given pit index
+   * @param index
+   * @return the ammount of stones after filling the side
+   */
+  public int playFrom(int index) {
+    RegularPit pit = pits.get(index);
+    int stonesLeft = pit.takeStones();
+    int sowAt = index + 1;
+    
+    while(stonesLeft > 0 && sowAt < pits.size()) {
+      Pit sowIn = pits.get(sowAt);
+      stonesLeft = sow(stonesLeft, sowIn);
+      sowAt++;
+    }
+    
+    if(stonesLeft > 0) {
+      stonesLeft = sow(stonesLeft, gravaHalPit);
+    }
+    
+    return stonesLeft;
+  }
+  
   /** Create a side with 6 pits.
    * @param title_ the name of the side. 
    */
   public Side(String title_) {
     title = title_;
     
-    pits = new ArrayList<RegularPit>();
-    for(int i = 0; i < 6; i++) {
+    int sideLength = 6;
+    pits = new ArrayList<RegularPit>(sideLength);
+    for(int i = 0; i < sideLength; i++) {
       RegularPit pit = new RegularPit();
       pits.add(pit);
     }
