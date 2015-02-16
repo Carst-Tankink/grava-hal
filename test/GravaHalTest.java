@@ -1,4 +1,5 @@
 import models.GravaHal;
+import models.Board;
 
 import org.junit.*;
 
@@ -14,5 +15,8 @@ public class GravaHalTest {
     assertThat(game.getPlayerTwo()).isEqualTo("Bob");
     
     assertThat(game.getActivePlayer()).isEqualTo("Alice");
+    
+    Board board = game.getBoard();
+    assertThat(board.getSides().size()).isEqualTo(2);
   }
 }

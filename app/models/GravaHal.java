@@ -9,11 +9,18 @@ import play.db.ebean.Model;
 public class GravaHal extends Model {
   private static final long serialVersionUID = -700730502688708739L;
   
-  
+  /* For persistence. */
   @Id private String gameId;
+
+  /* Players: the game has two players, one of which is active (has the turn) 
+  */
   private String playerOne;
   private String playerTwo;
   private String activePlayer;
+
+  /* The game board */
+  private Board board;
+  
   
   public String getGameId() {
     return gameId;
@@ -31,10 +38,16 @@ public class GravaHal extends Model {
     return activePlayer;
   }
 
+  public Board getBoard() {
+    return board;
+  }
+  
   public GravaHal(String playerOne_, String playerTwo_) {
     playerOne = playerOne_;
     playerTwo = playerTwo_;
     
     activePlayer = playerOne;
+    
+    board = new Board();
   }
 }
