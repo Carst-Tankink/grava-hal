@@ -17,10 +17,6 @@ public class RegularPit extends Pit {
     return stones;
   }
   
-  public boolean isEmpty() {
-    return contents > 0;
-  }
-  
   /** Creates a full pit, with 6 stones
    */
   public RegularPit() {

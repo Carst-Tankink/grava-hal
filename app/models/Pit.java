@@ -30,4 +30,11 @@ public class Pit extends Model {
     contents += 1;
   }
 
+  /** 
+   * Check if the pit is empty 
+   */
+  public boolean isEmpty() {
+    return contents == 0;
+  }
+
 }

@@ -14,6 +14,5 @@ public class PitTest {
     int initialContent = pit.getContents();
     pit.putStone();
     assertThat(pit.getContents()).isEqualTo(initialContent + 1);
-    
   }
 }

@@ -11,6 +11,6 @@ public class RegularPitTest {
     int inHand = pit.takeStones();
     
     assertThat(inHand).isEqualTo(6);
-    assertThat(pit.isEmpty());  
+    assertThat(pit.isEmpty()).isTrue();
   }
 }
