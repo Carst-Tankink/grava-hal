@@ -1,25 +1,23 @@
-@* game Template File *@
 @(game: GravaHal)
 
 @main("Game "){
   <ul>
     <li>Player one: @game.getPlayerOne()</li>
     <li>Player two: @game.getPlayerTwo()</li>
-  </ul>  
- 
+  </ul>
+  
+  <div id="active-player">
+    <span>It is @game.getActivePlayer()'s turn</span>
+  </div>
+  
   <div class="board">
-    <div class="side" id="sideOne">
-      @for(i <- 0 until 6){
-        <div class="pit">6</div>
-      }
-      <div class="grava-hal">0</div>
-    </div>
-    
-    <div class="side" id ="sideTwo">
-      @for(i <- 0 until 6){
-        <div class="pit">6</div>
-      }
-      <div class="grava-hal">0</div>
-    </div>
-  </div> 
+    @for(side <- Seq("side-one", "side-two")) {
+      <div class="side" id="@side">
+        @for(i <- 0 until 6){
+          <div class="pit">6</div>
+        }
+        <div class="grava-hal">0</div>
+      </div>
+    }
+  </div>
 }

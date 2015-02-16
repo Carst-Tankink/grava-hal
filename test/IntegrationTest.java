@@ -30,6 +30,8 @@ public class IntegrationTest {
         // Game should mention who is playing
         assertThat(browser.pageSource()).contains("Alice");
         assertThat(browser.pageSource()).contains("Bob");
+        
+        assertThat(browser.pageSource()).contains("It is Alice's turn");
       }
 
 
@@ -62,7 +64,6 @@ public class IntegrationTest {
         }
         
         assertThat(browser.$(".grava-hal").size()).isEqualTo(2);
-        
       }
     });
   }

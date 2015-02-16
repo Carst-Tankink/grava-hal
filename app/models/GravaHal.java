@@ -13,6 +13,7 @@ public class GravaHal extends Model {
   @Id private String gameId;
   private String playerOne;
   private String playerTwo;
+  private String activePlayer;
   
   public String getGameId() {
     return gameId;
@@ -27,11 +28,13 @@ public class GravaHal extends Model {
   }
   
   public String getActivePlayer() { 
-    return playerOne;
+    return activePlayer;
   }
 
   public GravaHal(String playerOne_, String playerTwo_) {
     playerOne = playerOne_;
     playerTwo = playerTwo_;
+    
+    activePlayer = playerOne;
   }
 }
