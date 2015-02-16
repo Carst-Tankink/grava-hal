@@ -13,8 +13,8 @@
   <div class="board">
     @for(side <- game.getBoard().getSides()) {
       <div class="side" id="side@side.getTitle()">
-        @for(i <- 0 until 6){
-          <div class="pit">6</div>
+        @for(p <- side.getPits()){
+          <div class="pit">@p.getContents()</div>
         }
         <div class="grava-hal">0</div>
       </div>

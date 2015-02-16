@@ -1,10 +1,13 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
@@ -14,12 +17,19 @@ public class Board extends Model {
   
   @Id private long boardId;
   
-  private ArrayList<Side> sides;
+  @OneToMany(cascade = CascadeType.ALL)
+  private List<Side> sides;
   
-  public List<Side> getSides() {
-    return sides;
+  /** Width of the board
+   * @return The number of sides the board has
+   */
+  public Iterator<Side> getSides() {
+    return sides.iterator();
   }
   
+  /** Create an initial board.
+   *  The board contains two sides, named One and Two. 
+   */
   public Board() {
     sides = new ArrayList<Side>();
     sides.add(new Side("One"));

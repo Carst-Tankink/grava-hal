@@ -1,7 +1,13 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
@@ -13,11 +19,36 @@ public class Side extends Model {
   
   private String title;
   
+  @OneToMany(cascade = CascadeType.ALL)
+  private List<Pit> pits;
+  
+  /** Create a side with 6 pits.
+   * @param title_ the name of the side. 
+   */
+  public Side(String title_) {
+    title = title_;
+    
+    pits = new ArrayList<Pit>();
+    for(int i = 0; i < 6; i++) {
+      Pit pit = new Pit();
+      pits.add(pit);
+    }
+    
+  }
+  
+  /** Getter for the side's title.
+   * @return The side's title.
+   */
   public String getTitle() {
     return title;
   }
   
-  public Side(String title_) {
-    title = title_;
+  
+  /** Iterator over the pits of this side.
+   * 
+   * @return The pits of this side, as an iterator
+   */
+  public Iterator<Pit> getPits() {
+    return pits.iterator();
   }
 }
