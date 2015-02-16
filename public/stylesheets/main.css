@@ -1,0 +1,50 @@
+.board {
+	border: 2px groove;
+	width: 425px;
+	height: 200px;
+	position: relative;
+}
+
+.side {
+	height: 100px;
+  width: 367px;
+  position: relative;
+}
+
+.pit {
+  border: 1px solid;
+  width: 50px;
+  height: 100%;
+}
+
+.grava-hal {
+  border: 1px solid;
+  background-color: white;
+  width: 50px;
+  height: 200px;
+}
+
+#sideOne {
+	float:left;
+}
+#sideOne > .pit {
+	float: right;
+}
+
+#sideOne > .grava-hal {
+	float: right;
+	clear: left; 
+}
+
+#sideTwo {
+	float: right;
+}
+#sideTwo > .pit {
+	float: left;
+}
+
+#sideTwo > .grava-hal {
+	position: relative;
+	top: -103px;
+	float: right;
+}
