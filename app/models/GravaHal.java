@@ -1,7 +1,9 @@
 package models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import play.db.ebean.Model;
 
@@ -19,6 +21,7 @@ public class GravaHal extends Model {
   private String activePlayer;
 
   /* The game board */
+  @OneToOne(cascade = CascadeType.ALL)
   private Board board;
   
   
