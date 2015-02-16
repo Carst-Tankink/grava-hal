@@ -2,6 +2,7 @@ package controllers;
 
 import models.GravaHal;
 import play.data.Form;
+import play.db.ebean.Model;
 import play.mvc.*;
 import views.html.*;
 import views.formdata.*;
@@ -20,7 +21,16 @@ public class Application extends Controller {
     }
     
     public static Result game(String gameId) {
-      return ok();
+      Model.Finder<String, GravaHal> finder =
+          new Model.Finder<String, GravaHal>(String.class, GravaHal.class);
+      GravaHal gh_game = finder.byId(gameId);
+
+      if (gh_game != null) {
+        return ok(game.render(gh_game));
+      }
+      else {
+        return notFound("Game not found").as("text/html");
+      }
     }
 
 }
