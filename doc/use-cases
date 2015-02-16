@@ -25,7 +25,7 @@
 * Allow players to watch games in progress
 * Might be for free with profiles.
 
-= Moves =
+= Moves++ =
 (Nice to have)
 * Store moves per game in db.
 * Turn-end push of server to browser
