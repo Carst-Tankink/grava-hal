@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Iterator;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -40,8 +42,8 @@ public class GravaHal extends Model {
     return activePlayer;
   }
 
-  public Board getBoard() {
-    return board;
+  public Iterator<Side> getSides() {
+    return board.getSides();
   }
   
   public GravaHal(String playerOne_, String playerTwo_) {
