@@ -3,16 +3,22 @@ import java.util.Iterator;
 import models.Side;
 import models.RegularPit;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.*;
 
 public class SideTest {
-
+  
+  Side side;
+  
+  @Before
+  public void setUp() {
+    side = new Side("TestSide");
+  }
+  
   @Test
-  public void testInitialContents() {
-    Side side = new Side("TestSide");
-    
+  public void testInitialContents() {  
     assertThat(side.getTitle()).isEqualTo("TestSide");
     
     for(Iterator<RegularPit> pI = side.getPits(); pI.hasNext();) {
@@ -25,24 +31,29 @@ public class SideTest {
 
   @Test
   public void simplePlayTest() {
-    Side side = new Side("TestSide");
-    
     int remainder = side.playFrom(0);
-    
+
     assertThat(remainder).isEqualTo(0);
-    
+
     Iterator<RegularPit> pI = side.getPits();
-    
+
     RegularPit first = pI.next();
     assertThat(first.isEmpty()).isTrue();
-    
+
     while (pI.hasNext()) {
       RegularPit pit = pI.next();
       assertThat(pit.getContents()).isEqualTo(7);
     }
-    
-    assertThat(side.getGravaHalPit().getContents()).isEqualTo(1);
+
+    assertThat(side.getGravaHalContents()).isEqualTo(1);
   }
   
-  
+  @Test
+  public void playAtEndTest() {
+    int remainder = side.playFrom(5);
+
+    assertThat(remainder).isEqualTo(5);
+    assertThat(side.getPitContents(5)).isEqualTo(0);
+    assertThat(side.getGravaHalContents()).isEqualTo(1);
+  }
 }

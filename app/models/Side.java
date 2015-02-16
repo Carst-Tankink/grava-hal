@@ -56,8 +56,8 @@ public class Side extends Model {
   }
   /**
    * Make a play starting at the given pit index
-   * @param index
-   * @return the ammount of stones after filling the side
+   * @param index the pit to start at, zero-based
+   * @return the amount of stones after filling the side
    */
   public int playFrom(int index) {
     RegularPit pit = pits.get(index);
@@ -75,6 +75,23 @@ public class Side extends Model {
     }
     
     return stonesLeft;
+  }
+  
+  /**
+   * Get the contents of the pit at the given index
+   * @param index the index of the pit, zero-based.
+   * @return the contents of the pit at the given index
+   */
+  public int getPitContents(int index) {
+    return pits.get(index).getContents(); 
+  }
+  
+  /**
+   * Get the contents of the Grava Hal
+   * @return the content of the Grava Hal pit.
+   */
+  public int getGravaHalContents() {
+    return gravaHalPit.getContents();
   }
   
   /** Create a side with 6 pits.
