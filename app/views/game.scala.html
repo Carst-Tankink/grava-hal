@@ -16,7 +16,7 @@
         @for(p <- side.getPits()){
           <div class="pit">@p.getContents()</div>
         }
-        <div class="grava-hal">0</div>
+        <div class="grava-hal">@side.getGravaHalPit().getContents()</div>
       </div>
     }
   </div>
