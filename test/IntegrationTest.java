@@ -1,7 +1,6 @@
 import java.util.Iterator;
 
 import org.fluentlenium.core.domain.*;
-import org.fluentlenium.core.filter.FilterBuilder;
 import org.junit.*;
 
 import play.test.*;
