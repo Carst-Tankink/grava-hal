@@ -19,6 +19,8 @@ public class SideTest {
       Pit pit = pI.next();
       assertThat(pit.getContents()).isEqualTo(6);
     }
+    
+    assertThat(side.getGravaHalPit().getContents()).isEqualTo(0);
   }
 
 }

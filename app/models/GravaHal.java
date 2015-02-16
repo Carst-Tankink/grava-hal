@@ -24,7 +24,6 @@ public class GravaHal extends Model {
   @OneToOne(cascade = CascadeType.ALL)
   private Board board;
   
-  
   public String getGameId() {
     return gameId;
   }
