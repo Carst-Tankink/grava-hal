@@ -1,4 +1,5 @@
 import models.Pit;
+import models.RegularPit;
 
 import org.junit.*;
 
@@ -9,13 +10,13 @@ public class PitTest {
 
   @Test
   public void initPitTest() {
-    Pit pit = new Pit();
+    Pit pit = new RegularPit();
     assertThat(pit.getContents()).isEqualTo(6);
   }
   
   @Test
   public void takeTest() {
-    Pit pit = new Pit();
+    RegularPit pit = new RegularPit();
     int inHand = pit.takeStones();
     
     assertThat(inHand).isEqualTo(6);
@@ -24,7 +25,7 @@ public class PitTest {
   
   @Test
   public void putTest() {
-    Pit pit = new Pit();
+    Pit pit = new RegularPit();
     
     assertThat(pit.getContents()).isEqualTo(6);
     pit.putStone();

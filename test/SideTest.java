@@ -1,7 +1,8 @@
 import java.util.Iterator;
 
-import models.Side;
 import models.Pit;
+import models.Side;
+import models.RegularPit;
 
 import org.junit.Test;
 
@@ -15,7 +16,7 @@ public class SideTest {
     
     assertThat(side.getTitle()).isEqualTo("TestSide");
     
-    for(Iterator<Pit> pI = side.getPits(); pI.hasNext();) {
+    for(Iterator<RegularPit> pI = side.getPits(); pI.hasNext();) {
       Pit pit = pI.next();
       assertThat(pit.getContents()).isEqualTo(6);
     }

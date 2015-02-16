@@ -21,7 +21,7 @@ public class Side extends Model {
   private String title;
   
   @OneToMany(cascade = CascadeType.ALL)
-  private List<Pit> pits;
+  private List<RegularPit> pits;
   
   @OneToOne(cascade = CascadeType.ALL)
   private GravaHalPit gravaHalPit;
@@ -37,7 +37,7 @@ public class Side extends Model {
    * 
    * @return The pits of this side, as an iterator
    */
-  public Iterator<Pit> getPits() {
+  public Iterator<RegularPit> getPits() {
     return pits.iterator();
   }
   
@@ -50,9 +50,9 @@ public class Side extends Model {
   public Side(String title_) {
     title = title_;
     
-    pits = new ArrayList<Pit>();
+    pits = new ArrayList<RegularPit>();
     for(int i = 0; i < 6; i++) {
-      Pit pit = new Pit();
+      RegularPit pit = new RegularPit();
       pits.add(pit);
     }
     
