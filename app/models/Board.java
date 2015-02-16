@@ -20,8 +20,8 @@ public class Board extends Model {
   @OneToMany(cascade = CascadeType.ALL)
   private List<Side> sides;
   
-  /** Width of the board
-   * @return The number of sides the board has
+  /** Iterator over the sides of the board
+   * @return An iterator over the sides of the board
    */
   public Iterator<Side> getSides() {
     return sides.iterator();
