@@ -6,4 +6,20 @@
     <li>Player one: @game.getPlayerOne()</li>
     <li>Player two: @game.getPlayerTwo()</li>
   </ul>  
+ 
+  <div class="board">
+    <div class="side" id="sideOne">
+      @for(i <- 0 until 6){
+        <div class="pit">6</div>
+      }
+      <div class="grava-hal">0</div>
+    </div>
+    
+    <div class="side" id ="sideTwo">
+      @for(i <- 0 until 6){
+        <div class="pit">6</div>
+      }
+      <div class="grava-hal">0</div>
+    </div>
+  </div> 
 }

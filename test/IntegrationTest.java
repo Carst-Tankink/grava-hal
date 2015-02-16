@@ -1,23 +1,29 @@
+import java.util.Iterator;
+
+import org.fluentlenium.core.domain.*;
+import org.fluentlenium.core.filter.FilterBuilder;
 import org.junit.*;
 
 import play.test.*;
 import play.libs.F.*;
 import static play.test.Helpers.*;
-
 import static org.fest.assertions.Assertions.*;
 
 
 public class IntegrationTest {
+  
+  private void createGame(TestBrowser browser) {
+    browser.goTo("http://localhost:3333");
+    browser.fill("input[name=\"playerOne\"]").with("Alice");
+    browser.fill("input[name=\"playerTwo\"]").with("Bob");
+    browser.submit("#startGame");
+  }
 
   @Test
   public void createGameTest() {
     running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
-        browser.goTo("http://localhost:3333");
-        browser.fill("input[name=\"playerOne\"]").with("Alice");
-        browser.fill("input[name=\"playerTwo\"]").with("Bob");
-        browser.submit("#startGame");
-
+        createGame(browser);
         // Redirection to started game
         assertThat(browser.url()).startsWith("http://localhost:3333/game/");
 
@@ -25,6 +31,8 @@ public class IntegrationTest {
         assertThat(browser.pageSource()).contains("Alice");
         assertThat(browser.pageSource()).contains("Bob");
       }
+
+
     });
   }
 
@@ -39,4 +47,23 @@ public class IntegrationTest {
     });
   }
 
+  @Test
+  public void boardTest() {
+    running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) {
+        createGame(browser);
+        
+        FluentList<FluentWebElement> pitList = browser.$(".pit");
+        assertThat(pitList.size()).isEqualTo(12);
+        
+        for(Iterator<FluentWebElement> plI = pitList.iterator(); plI.hasNext();) {
+          FluentWebElement pit = plI.next();
+          assertThat(pit.getText()).isEqualTo("6");
+        }
+        
+        assertThat(browser.$(".grava-hal").size()).isEqualTo(2);
+        
+      }
+    });
+  }
 }
