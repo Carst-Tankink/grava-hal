@@ -6,6 +6,5 @@ public class BoardTest {
   @Test
   void initBoardTest() {
     Board board = new Board();
-    
   }
 }
