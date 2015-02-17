@@ -50,7 +50,7 @@ public class Side extends Model {
   }
   
   
-  private int sow(int hand, Pit pit) {
+  public int sow(int hand, Pit pit) {
     pit.putStone();
     return hand - 1;
   }

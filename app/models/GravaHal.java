@@ -58,17 +58,15 @@ public class GravaHal extends Model {
     // TODO:  Refactor to method.
     while (inHand > 0) {
       currentSide = getNextSide(currentSide);
-      Iterator<RegularPit> pI = currentSide.getPits();
       
+      Iterator<RegularPit> pI = currentSide.getPits();
       while (pI.hasNext() && inHand > 0) {
         RegularPit pit = pI.next();
-        pit.putStone();
-        inHand--;
+        inHand = currentSide.sow(inHand, pit);
       }
 
       if (inHand > 0 && currentSide == playerSide) {
-        currentSide.getGravaHalPit().putStone();
-        inHand--;
+        inHand = currentSide.sow(inHand, currentSide.getGravaHalPit());
       }
     }
   }
