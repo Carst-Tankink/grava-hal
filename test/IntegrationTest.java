@@ -57,8 +57,7 @@ public class IntegrationTest {
         FluentList<FluentWebElement> pitList = browser.$(".pit");
         assertThat(pitList.size()).isEqualTo(12);
         
-        for(Iterator<FluentWebElement> plI = pitList.iterator(); plI.hasNext();) {
-          FluentWebElement pit = plI.next();
+        for(FluentWebElement pit : pitList) {
           assertThat(pit.getText()).isEqualTo("6");
         }
         
