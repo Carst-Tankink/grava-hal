@@ -49,26 +49,22 @@ public class GravaHal extends Model {
     return board.iterator();
   }
   
+  /**
+   * Make a play on player's side, taken from the given index.
+   * Updates the board with the new pit contents.
+   * @param player The side to play from.
+   * @param pitIndex The pit to take the stones from.
+   */
   public void playFrom(String player, int pitIndex) {
     Side playerSide = getPlayerSide(player);
     Side currentSide = playerSide;
     
-    int inHand = playerSide.playFrom(pitIndex);
+    int inHand = currentSide.playFrom(pitIndex);
     
-    // TODO:  Refactor to method.
     while (inHand > 0) {
-      currentSide = getNextSide(currentSide);
-      
-      Iterator<RegularPit> pI = currentSide.getPits();
-      while (pI.hasNext() && inHand > 0) {
-        RegularPit pit = pI.next();
-        inHand = currentSide.sow(inHand, pit);
-      }
-
-      if (inHand > 0 && currentSide == playerSide) {
-        inHand = currentSide.sow(inHand, currentSide.getGravaHalPit());
-      }
-    }
+      currentSide = getNextSide(currentSide);   
+      inHand = currentSide.sowFrom(inHand, 0, currentSide == playerSide);
+   }
   }
   
   private Side getNextSide(Side side) {

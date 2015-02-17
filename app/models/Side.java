@@ -62,18 +62,28 @@ public class Side extends Model {
   public int playFrom(int index) {
     RegularPit pit = pits.get(index);
     int stonesLeft = pit.takeStones();
-    int sowAt = index + 1;
+    stonesLeft = sowFrom(stonesLeft, index + 1, true);
     
-    while(stonesLeft > 0 && sowAt < pits.size()) {
-      Pit sowIn = pits.get(sowAt);
+    return stonesLeft;
+  }
+
+  /**
+   * Sow the hand given by stonesLeft into the pits starting at start
+   * @param stonesLeft Current hand
+   * @param start Pit to start sowing in
+   * @param includeGravaHal Whether to sow in the side's Grava Hal
+   * @return Stones left after sowing
+   */
+  public int sowFrom(int stonesLeft, int start, boolean includeGravaHal) {
+    while(stonesLeft > 0 && start < pits.size()) {
+      Pit sowIn = pits.get(start);
       stonesLeft = sow(stonesLeft, sowIn);
-      sowAt++;
+      start++;
     }
     
-    if(stonesLeft > 0) {
+    if(stonesLeft > 0 && includeGravaHal) {
       stonesLeft = sow(stonesLeft, gravaHalPit);
     }
-    
     return stonesLeft;
   }
   
