@@ -61,4 +61,12 @@ public class GravaHalTest {
     assertThat(game.contentsAtGravaHal(playerTwo)).isEqualTo(1);
     assertThat(game.contentsAt(playerOne, 0)).isEqualTo(2);
   }
+  
+  @Test
+  public void turnChangeTest() {
+    game.playFrom(playerOne, 2);
+    assertThat(game.getActivePlayer()).isEqualTo(playerTwo);
+  }
+  
+  
 }
