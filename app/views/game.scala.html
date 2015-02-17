@@ -11,13 +11,17 @@
   </div>
   
   <div class="board">
-    @for(side <- game.getSides()) {
+    @for(player <- Seq(game.getPlayerOne(), game.getPlayerTwo())) {
+      @defining(game.getPlayerSide(player)) {side =>
       <div class="side" id="side@side.getTitle()">
         @for(p <- side.getPits()){
-          <div class="pit">@p.getContents()</div>
+          <div class="regular pit" id="pit@p.getId()">
+            <a href="javascript:playFrom(&quot;@game.getGameId()&quot;, &quot;@player&quot;, &quot;@p.getId()&quot;)">@p.getContents()</a>
+          </div>
         }
-        <div class="pit grava-hal">@side.getGravaHalPit().getContents()</div>
+        <div class="grava-hal pit">@side.getGravaHalPit().getContents()</div>
       </div>
+      }
     }
   </div>
 }

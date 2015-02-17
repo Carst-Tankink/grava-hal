@@ -20,17 +20,35 @@ public class Application extends Controller {
       return redirect(routes.Application.game(game.getGameId()));
     }
     
-    public static Result game(String gameId) {
+    private static GravaHal gameById(String gameId) {
       Model.Finder<String, GravaHal> finder =
           new Model.Finder<String, GravaHal>(String.class, GravaHal.class);
-      GravaHal gh_game = finder.byId(gameId);
-
+      return finder.byId(gameId);      
+    }
+    
+    private static Result gameNotFound = notFound("Game not found").as("text/html");
+    
+    public static Result game(String gameId) {
+      GravaHal gh_game = gameById(gameId);
+      
       if (gh_game != null) {
         return ok(game.render(gh_game));
       }
       else {
-        return notFound("Game not found").as("text/html");
+        return gameNotFound;
       }
     }
-
+    
+    public static Result playFrom(String gameId, String player, int pit) {
+      GravaHal gh_game = gameById(gameId);
+      
+      if (gh_game != null) {
+        gh_game.playFrom(player, pit);
+        gh_game.save();
+        return ok();
+      }
+      else {
+        return gameNotFound;
+      }
+    }
 }

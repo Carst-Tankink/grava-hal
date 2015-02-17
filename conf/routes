@@ -3,11 +3,13 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                                 controllers.Application.index()
 
-POST    /start_game                 controllers.Application.startGravaHal()
+POST    /start_game                       controllers.Application.startGravaHal()
 
-GET     /game/*name                 controllers.Application.game(name)
+GET     /game/*name                       controllers.Application.game(name)
+
+POST    /game/*name/playFrom/*player/*pit controllers.Application.playFrom(name, player, pit: Int)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /assets/*file                     controllers.Assets.at(path="/public", file)

@@ -60,11 +60,11 @@ public class GravaHal extends Model {
     Side currentSide = playerSide;
     
     int inHand = currentSide.playFrom(pitIndex);
-    
     while (inHand > 0) {
       currentSide = getNextSide(currentSide);   
       inHand = currentSide.sowFrom(inHand, 0, currentSide == playerSide);
    }
+   
   }
 
   private Side getNextSide(Side side) {
@@ -72,9 +72,9 @@ public class GravaHal extends Model {
     return board.get((index + 1) % 2);
   }
   
-  private Side getPlayerSide(String player) {
+  public Side getPlayerSide(String player) {
     // TODO: Better mapping of player -> side
-    int playerIndex = (player == playerOne) ? 0 : 1;
+    int playerIndex = (player.equals(playerOne)) ? 0 : 1;
     Side playerSide = board.get(playerIndex);
     return playerSide;
   }

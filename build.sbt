@@ -10,5 +10,6 @@ libraryDependencies ++= Seq(
   javaJdbc,
   javaEbean,
   cache,
-  javaWs
+  javaWs,
+  "net.sourceforge.htmlunit" % "htmlunit" % "2.15" % "test"
 )

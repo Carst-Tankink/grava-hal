@@ -113,7 +113,7 @@ public class Side extends Model {
     int sideLength = 6;
     pits = new ArrayList<RegularPit>(sideLength);
     for(int i = 0; i < sideLength; i++) {
-      RegularPit pit = new RegularPit();
+      RegularPit pit = new RegularPit(i);
       pits.add(pit);
     }
     

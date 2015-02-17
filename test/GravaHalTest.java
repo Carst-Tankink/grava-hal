@@ -21,6 +21,9 @@ public class GravaHalTest {
     assertThat(game.getPlayerTwo()).isEqualTo(playerTwo);
     
     assertThat(game.getActivePlayer()).isEqualTo(playerOne);
+    
+    assertThat(game.getPlayerSide("Alice").getTitle()).isEqualTo("One");
+    assertThat(game.getPlayerSide(playerTwo).getTitle()).isEqualTo("Two");
   }
   
   @Test
