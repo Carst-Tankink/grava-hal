@@ -16,7 +16,7 @@ public class GravaHalTest {
   }
   
   @Test
-  public void initGame() {
+  public void initGameTest() {
     assertThat(game.getPlayerOne()).isEqualTo(playerOne);
     assertThat(game.getPlayerTwo()).isEqualTo(playerTwo);
     
@@ -27,7 +27,7 @@ public class GravaHalTest {
   }
   
   @Test
-  public void testPlay() {
+  public void playTest() {
     game.playFrom(playerOne, 5);
     
     assertThat(game.contentsAt(playerOne, 5)).isEqualTo(0);
