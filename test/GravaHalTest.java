@@ -7,23 +7,24 @@ import static org.fest.assertions.Assertions.*;
 public class GravaHalTest {
   
   GravaHal game;
+  String playerOne = "Alice";
+  String playerTwo = "Bob";
+  
   @Before
   public void setUp() {
-    game = new GravaHal("Alice", "Bob");
+    game = new GravaHal(playerOne, playerTwo);
   }
   
   @Test
   public void initGame() {
-    assertThat(game.getPlayerOne()).isEqualTo("Alice");
-    assertThat(game.getPlayerTwo()).isEqualTo("Bob");
+    assertThat(game.getPlayerOne()).isEqualTo(playerOne);
+    assertThat(game.getPlayerTwo()).isEqualTo(playerTwo);
     
-    assertThat(game.getActivePlayer()).isEqualTo("Alice");
+    assertThat(game.getActivePlayer()).isEqualTo(playerOne);
   }
   
   @Test
   public void testPlay() {
-    String playerOne = game.getPlayerOne();
-    String playerTwo = game.getPlayerTwo();
     game.playFrom(playerOne, 5);
     
     assertThat(game.contentsAt(playerOne, 5)).isEqualTo(0);
@@ -36,5 +37,25 @@ public class GravaHalTest {
     assertThat(game.contentsAt(playerTwo, 5)).isEqualTo(6);
     
     
+  }
+  
+  @Test
+  public void skipOpposingGHTest() {
+    // Never sow in an opposing Grava Hal.
+    game.playFrom(playerOne, 0);
+    assertThat(game.contentsAtGravaHal(playerOne)).isEqualTo(1);
+    
+    // Player one goes again.
+    game.playFrom(playerOne, 1);
+    assertThat(game.contentsAt(playerOne, 5)).isEqualTo(8);
+    
+    // Any play by player two, not giving him another turn
+    game.playFrom(playerTwo, 1);
+    assertThat(game.contentsAtGravaHal(playerTwo)).isEqualTo(1);
+    assertThat(game.contentsAt(playerOne, 0)).isEqualTo(1);
+    
+    game.playFrom(playerOne, 5); 
+    assertThat(game.contentsAtGravaHal(playerTwo)).isEqualTo(1);
+    assertThat(game.contentsAt(playerOne, 0)).isEqualTo(2);
   }
 }

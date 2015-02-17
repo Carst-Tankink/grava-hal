@@ -66,7 +66,7 @@ public class GravaHal extends Model {
       inHand = currentSide.sowFrom(inHand, 0, currentSide == playerSide);
    }
   }
-  
+
   private Side getNextSide(Side side) {
     int index = board.indexOf(side);
     return board.get((index + 1) % 2);
