@@ -19,7 +19,6 @@
 
 .grava-hal {
   border: 1px solid;
-  background-color: white;
   width: 50px;
   height: 200px;
 }
@@ -29,10 +28,10 @@
 }
 #sideOne > .pit {
 	float: right;
+	background-color: #CCCC66;
 }
 
 #sideOne > .grava-hal {
-	float: right;
 	clear: left; 
 }
 
@@ -41,6 +40,7 @@
 }
 #sideTwo > .pit {
 	float: left;
+	background-color: #9999FF;
 }
 
 #sideTwo > .grava-hal {
