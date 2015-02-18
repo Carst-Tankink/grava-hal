@@ -56,7 +56,7 @@ public class GravaHal extends Model {
    * @param pitIndex The pit to take the stones from.
    */
   public void playFrom(String player, int pitIndex) {
-    if (player.equals(activePlayer)) {
+    if (canPlay(player, pitIndex)) {
       Side playerSide = getPlayerSide(player);
       Side currentSide = playerSide;
     
@@ -68,6 +68,11 @@ public class GravaHal extends Model {
       
       activePlayer = changePlayer(result);
     }
+  }
+
+  public boolean canPlay(String player, int pitIndex) {
+    Side side = getPlayerSide(player);
+    return player.equals(activePlayer) && side.getPitContents(pitIndex) > 0;
   }
 
   private String changePlayer(TurnResult turnResult) {

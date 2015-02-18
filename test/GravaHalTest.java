@@ -87,4 +87,18 @@ public class GravaHalTest {
     game.playFrom(playerOne, 0);
     assertThat(game.getActivePlayer()).isEqualTo(playerOne);
   }
+  
+  @Test
+  public void emptyPitTest() {
+    // (Design assumption) it shouldn't be possible to play from an empty pit.
+    game.playFrom(playerOne, 5);
+    assertThat(game.contentsAt(playerOne, 5)).isEqualTo(0);
+    
+    game.playFrom(playerTwo, 1);
+    assertThat(game.contentsAt(playerOne, 5)).isEqualTo(0);
+    
+    game.playFrom(playerOne, 5);
+    assertThat(game.contentsAt(playerOne, 5)).isEqualTo(0);
+    assertThat(game.getActivePlayer()).isEqualTo(playerOne);
+  }
 }
