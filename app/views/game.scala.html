@@ -16,7 +16,11 @@
       <div class="side" id="side@side.getTitle()">
         @for(p <- side.getPits()){
           <div class="regular pit" id="pit@p.getId()">
+          @if(player == game.getActivePlayer()) {
             <a href="javascript:playFrom(&quot;@game.getGameId()&quot;, &quot;@player&quot;, &quot;@p.getId()&quot;)">@p.getContents()</a>
+          } else {
+            @p.getContents()           
+          }
           </div>
         }
         <div class="grava-hal pit">@side.getGravaHalPit().getContents()</div>
