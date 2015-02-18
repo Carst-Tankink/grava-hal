@@ -8,8 +8,8 @@ public class RegularPit extends Pit {
   
   private int id;
   
-  public String getId() {
-    return Integer.toString(id);
+  public int getId() {
+    return id;
   }
   
   /**
