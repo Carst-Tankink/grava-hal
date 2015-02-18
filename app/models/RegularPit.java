@@ -29,4 +29,8 @@ public class RegularPit extends Pit {
     super(6);
     id = id_;
   }
+  
+  public boolean isGravaHalPit() {
+    return false;
+  }
 }

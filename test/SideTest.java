@@ -31,7 +31,7 @@ public class SideTest {
 
   @Test
   public void simplePlayTest() {
-    int remainder = side.playFrom(0);
+    int remainder = side.playFrom(0).getInHand();
 
     assertThat(remainder).isEqualTo(0);
 
@@ -50,7 +50,7 @@ public class SideTest {
   
   @Test
   public void playAtEndTest() {
-    int remainder = side.playFrom(5);
+    int remainder = side.playFrom(5).getInHand();
 
     assertThat(remainder).isEqualTo(5);
     assertThat(side.getPitContents(5)).isEqualTo(0);

@@ -12,4 +12,8 @@ public class GravaHalPit extends Pit {
   public GravaHalPit() {
     super(0);
   }
+  
+  public boolean isGravaHalPit() {
+    return true;
+  }
 }

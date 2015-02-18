@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 import play.db.ebean.Model;
 
 @MappedSuperclass
-public class Pit extends Model {
+public abstract class Pit extends Model {
 
   @Id protected String pitId;
   protected int contents;
@@ -36,5 +36,6 @@ public class Pit extends Model {
   public boolean isEmpty() {
     return contents == 0;
   }
-
+  
+  public abstract boolean isGravaHalPit();
 }

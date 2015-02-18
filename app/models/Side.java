@@ -59,12 +59,10 @@ public class Side extends Model {
    * @param index the pit to start at, zero-based
    * @return the amount of stones after filling the side
    */
-  public int playFrom(int index) {
+  public TurnResult playFrom(int index) {
     RegularPit pit = pits.get(index);
     int stonesLeft = pit.takeStones();
-    stonesLeft = sowFrom(stonesLeft, index + 1, true);
-    
-    return stonesLeft;
+    return sowFrom(stonesLeft, index + 1, true);
   }
 
   /**
@@ -74,17 +72,20 @@ public class Side extends Model {
    * @param includeGravaHal Whether to sow in the side's Grava Hal
    * @return Stones left after sowing
    */
-  public int sowFrom(int stonesLeft, int start, boolean includeGravaHal) {
+  public TurnResult sowFrom(int stonesLeft, int start, boolean includeGravaHal) {
+    Pit lastPit = null;
     while(stonesLeft > 0 && start < pits.size()) {
       Pit sowIn = pits.get(start);
       stonesLeft = sow(stonesLeft, sowIn);
+      lastPit = sowIn;
       start++;
     }
     
     if(stonesLeft > 0 && includeGravaHal) {
       stonesLeft = sow(stonesLeft, gravaHalPit);
+      lastPit = gravaHalPit;
     }
-    return stonesLeft;
+    return new TurnResult(stonesLeft, lastPit);
   }
   
   /**

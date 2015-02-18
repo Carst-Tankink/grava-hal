@@ -66,7 +66,25 @@ public class GravaHalTest {
   public void turnChangeTest() {
     game.playFrom(playerOne, 2);
     assertThat(game.getActivePlayer()).isEqualTo(playerTwo);
+    
   }
   
+  @Test
+  public void playNoTurnTest() {
+    // Playing when it is not your turn.
+    game.playFrom(playerOne, 2);
+    assertThat(game.contentsAt(playerOne, 2)).isEqualTo(0);
+    game.playFrom(playerOne, 1);
+    assertThat(game.contentsAt(playerOne, 2)).isEqualTo(0);
+    
+    assertThat(game.getActivePlayer()).isEqualTo(playerTwo);
+    
+  }
   
+  @Test
+  public void goAgainTest() {
+    // Plays ending in the Grava Hal allow you to go agian.
+    game.playFrom(playerOne, 0);
+    assertThat(game.getActivePlayer()).isEqualTo(playerOne);
+  }
 }

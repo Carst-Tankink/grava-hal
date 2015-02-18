@@ -56,20 +56,27 @@ public class GravaHal extends Model {
    * @param pitIndex The pit to take the stones from.
    */
   public void playFrom(String player, int pitIndex) {
-    Side playerSide = getPlayerSide(player);
-    Side currentSide = playerSide;
+    if (player.equals(activePlayer)) {
+      Side playerSide = getPlayerSide(player);
+      Side currentSide = playerSide;
     
-    int inHand = currentSide.playFrom(pitIndex);
-    while (inHand > 0) {
-      currentSide = getNextSide(currentSide);   
-      inHand = currentSide.sowFrom(inHand, 0, currentSide == playerSide);
-   }
-   
-    activePlayer = changePlayer();
+      TurnResult result = currentSide.playFrom(pitIndex);
+      while (result.getInHand() > 0) {
+        currentSide = getNextSide(currentSide);   
+        result = currentSide.sowFrom(result.getInHand(), 0, currentSide == playerSide);
+      }
+      
+      activePlayer = changePlayer(result);
+    }
   }
 
-  private String changePlayer() {
-    return activePlayer.equals(playerOne) ? playerTwo : playerOne;
+  private String changePlayer(TurnResult turnResult) {
+    if (turnResult.getLastPit().isGravaHalPit()) {
+      return activePlayer;
+    }
+    else {
+      return activePlayer.equals(playerOne) ? playerTwo : playerOne;
+    }
   }
   
   private Side getNextSide(Side side) {
