@@ -83,7 +83,7 @@ public class GravaHalTest {
   
   @Test
   public void goAgainTest() {
-    // Plays ending in the Grava Hal allow you to go agian.
+    // Plays ending in the Grava Hal allow you to go again.
     game.playFrom(playerOne, 0);
     assertThat(game.getActivePlayer()).isEqualTo(playerOne);
   }

@@ -26,25 +26,14 @@ public class Side extends Model {
   @OneToOne(cascade = CascadeType.ALL)
   private GravaHalPit gravaHalPit;
 
-  /** Getter for the side's title.
-   * @return The side's title.
-   */
   public String getTitle() {
     return title;
   }  
   
-  /** 
-   * Iterator over the pits of this side.
-   * @return The pits of this side, as an iterator
-   */
   public Iterator<RegularPit> getPits() {
     return pits.iterator();
   }
   
-  /** Getter for this side's Grava Hal
-   * 
-   * @return The Grava Hal
-   */
   public GravaHalPit getGravaHalPit() {
     return gravaHalPit;
   }
@@ -54,10 +43,12 @@ public class Side extends Model {
     pit.putStone();
     return hand - 1;
   }
+  
   /**
    * Make a play starting at the given pit index
    * @param index the pit to start at, zero-based
-   * @return the amount of stones after filling the side
+   * @return a Result, containing remaining stones and the pit the last stone landed in 
+
    */
   public TurnResult playFrom(int index) {
     if (index >= 0 && index < pits.size()) {
