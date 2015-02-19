@@ -113,5 +113,7 @@ public class GravaHalTest {
       assertThat(game.contentsAtGravaHal(playerTwo)).isEqualTo(0);
     }
     
+    assertThat(game.getActivePlayer()).isEqualTo(playerOne);
+    
   }
 }
