@@ -56,4 +56,16 @@ public class SideTest {
     assertThat(side.getPitContents(5)).isEqualTo(0);
     assertThat(side.getGravaHalContents()).isEqualTo(1);
   }
+  
+  @Test
+  public void illegalPlayTest() {
+    assertThat(side.getPitContents(6)).isEqualTo(0);
+    side.playFrom(6);
+    
+    for(int i = 0; i < 6; i++) {
+      assertThat(side.getPitContents(i)).isEqualTo(6);
+    }
+    
+    assertThat(side.getGravaHalContents()).isEqualTo(0);
+  }
 }

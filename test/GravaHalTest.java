@@ -101,4 +101,17 @@ public class GravaHalTest {
     assertThat(game.contentsAt(playerOne, 5)).isEqualTo(0);
     assertThat(game.getActivePlayer()).isEqualTo(playerOne);
   }
+  
+  @Test
+  public void wrongPlayTest() {
+    game.playFrom(playerOne, -1);
+
+    for(int i = 0; i < 6; i++) {
+      assertThat(game.contentsAt(playerOne, i)).isEqualTo(6);
+      assertThat(game.contentsAtGravaHal(playerOne)).isEqualTo(0);
+      assertThat(game.contentsAt(playerTwo, i)).isEqualTo(6);
+      assertThat(game.contentsAtGravaHal(playerTwo)).isEqualTo(0);
+    }
+    
+  }
 }

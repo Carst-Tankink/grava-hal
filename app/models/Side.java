@@ -60,9 +60,15 @@ public class Side extends Model {
    * @return the amount of stones after filling the side
    */
   public TurnResult playFrom(int index) {
-    RegularPit pit = pits.get(index);
-    int stonesLeft = pit.takeStones();
-    return sowFrom(stonesLeft, index + 1, true);
+    if (index >= 0 && index < pits.size()) {
+      RegularPit pit = pits.get(index);
+      int stonesLeft = pit.takeStones();
+      return sowFrom(stonesLeft, index + 1, true);
+    }
+    else {
+      RegularPit fakePit = new RegularPit(-1);
+      return new TurnResult(0, fakePit);
+    }
   }
 
   /**
@@ -89,12 +95,18 @@ public class Side extends Model {
   }
   
   /**
-   * Get the contents of the pit at the given index
+   * Get the contents of the pit at the given index.
+   * If the index is not part of the side, return zero.
    * @param index the index of the pit, zero-based.
    * @return the contents of the pit at the given index
    */
   public int getPitContents(int index) {
-    return pits.get(index).getContents(); 
+    if (index >= 0 && index < pits.size()) {
+      return pits.get(index).getContents();
+    }
+    else { 
+      return 0;
+    }
   }
   
   /**
