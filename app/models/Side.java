@@ -133,5 +133,4 @@ public class Side extends Model {
   public GravaHalPit getGravaHalPit() {
     return gravaHalPit;
   }
-  
 }
