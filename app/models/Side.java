@@ -32,22 +32,21 @@ public class Side extends Model {
    * @return true iff the index points to a valid, non-empty pit
    */
   public boolean isNotEmpty(int index) {
-    return index >= 0 && index < pits.size() && getPitContents(index) > 0; 
+    return validPit(index) && getPitContents(index) > 0; 
   }
-  
-  private int sow(int hand, Pit pit) {
-    pit.putStone();
-    return hand - 1;
+
+  private boolean validPit(int index) {
+    return index >= 0 && index < pits.size();
   }
-  
+
   /**
    * Make a play starting at the given pit index
    * @param index the pit to start at, zero-based
-   * @return a Result, containing remaining stones and the pit the last stone landed in 
-
+   * @return a Result, containing remaining stones and whether the last stone landed in the Grava Hal. 
+   * Returns a TurnResult of 0 left, not in Grava Hal
    */
   public TurnResult playFrom(int index) {
-    if (index >= 0 && index < pits.size()) {
+    if (validPit(index)) {
       RegularPit pit = pits.get(index);
       int stonesLeft = pit.takeStones();
       return sowFrom(stonesLeft, index + 1, true);
@@ -79,6 +78,11 @@ public class Side extends Model {
     return new TurnResult(stonesLeft, lastInGravaHal);
   }
   
+  private int sow(int hand, Pit pit) {
+    pit.putStone();
+    return hand - 1;
+  }
+  
   /**
    * Get the contents of the pit at the given index.
    * If the index is not part of the side, return zero.
@@ -86,7 +90,7 @@ public class Side extends Model {
    * @return the contents of the pit at the given index
    */
   public int getPitContents(int index) {
-    if (index >= 0 && index < pits.size()) {
+    if (validPit(index)) {
       return pits.get(index).getContents();
     }
     else { 
