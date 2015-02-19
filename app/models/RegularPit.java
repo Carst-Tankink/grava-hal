@@ -4,16 +4,10 @@ import javax.persistence.Entity;
 
 @Entity
 public class RegularPit extends Pit {
-  private static final long serialVersionUID = 5441466998278023929L;
-  
-  private int id;
-  
-  public int getId() {
-    return id;
-  }
+   private int id;
   
   /**
-   * Take all stones from the pit, making it empty.
+   * Take all stones from the pit.
    * 
    * @return the number of stones that were in the pit
    */
@@ -30,7 +24,8 @@ public class RegularPit extends Pit {
     id = id_;
   }
   
-  public boolean isGravaHalPit() {
-    return false;
+  public int getId() {
+    return id;
   }
+  
 }
