@@ -2,13 +2,13 @@ package models;
 
 public class TurnResult {
   private int inHand;
-  private Pit lastPit;
+  private boolean inGravaHal;
   
   public int getInHand() { return inHand; }
-  public Pit getLastPit() { return lastPit; }
+  public boolean getInGravaHal() { return inGravaHal; }
   
-  public TurnResult(int inHand_, Pit lastPit_) {
+  public TurnResult(int inHand_, boolean inGravaHal_) {
     inHand = inHand_;
-    lastPit = lastPit_;
+    inGravaHal = inGravaHal_;
   }
 }

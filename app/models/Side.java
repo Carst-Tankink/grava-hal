@@ -26,20 +26,16 @@ public class Side extends Model {
   @OneToOne(cascade = CascadeType.ALL)
   private GravaHalPit gravaHalPit;
 
-  public String getTitle() {
-    return title;
-  }  
   
-  public Iterator<RegularPit> getPits() {
-    return pits.iterator();
+  /**
+   * @param index
+   * @return true iff the index points to a valid, non-empty pit
+   */
+  public boolean isNotEmpty(int index) {
+    return index >= 0 && index < pits.size() && getPitContents(index) > 0; 
   }
   
-  public GravaHalPit getGravaHalPit() {
-    return gravaHalPit;
-  }
-  
-  
-  public int sow(int hand, Pit pit) {
+  private int sow(int hand, Pit pit) {
     pit.putStone();
     return hand - 1;
   }
@@ -57,8 +53,7 @@ public class Side extends Model {
       return sowFrom(stonesLeft, index + 1, true);
     }
     else {
-      RegularPit fakePit = new RegularPit(-1);
-      return new TurnResult(0, fakePit);
+      return new TurnResult(0, false);
     }
   }
 
@@ -70,19 +65,18 @@ public class Side extends Model {
    * @return Stones left after sowing
    */
   public TurnResult sowFrom(int stonesLeft, int start, boolean includeGravaHal) {
-    Pit lastPit = null;
+    boolean lastInGravaHal = false;
     while(stonesLeft > 0 && start < pits.size()) {
       Pit sowIn = pits.get(start);
       stonesLeft = sow(stonesLeft, sowIn);
-      lastPit = sowIn;
       start++;
     }
     
     if(stonesLeft > 0 && includeGravaHal) {
       stonesLeft = sow(stonesLeft, gravaHalPit);
-      lastPit = gravaHalPit;
+      lastInGravaHal = true;
     }
-    return new TurnResult(stonesLeft, lastPit);
+    return new TurnResult(stonesLeft, lastInGravaHal);
   }
   
   /**
@@ -123,4 +117,17 @@ public class Side extends Model {
     
     gravaHalPit = new GravaHalPit();
   }
+  
+  public String getTitle() {
+    return title;
+  }  
+  
+  public Iterator<RegularPit> getPits() {
+    return pits.iterator();
+  }
+  
+  public GravaHalPit getGravaHalPit() {
+    return gravaHalPit;
+  }
+  
 }

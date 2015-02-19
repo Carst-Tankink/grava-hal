@@ -1,14 +1,12 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import play.db.ebean.Model;
 
@@ -29,26 +27,6 @@ public class GravaHal extends Model {
   @OneToMany(cascade = CascadeType.ALL)
   private List<Side> board;
   
-  public String getGameId() {
-    return gameId;
-  }
-  
-  public String getPlayerOne() {
-    return playerOne;
-  }
-  
-  public String getPlayerTwo() {
-    return playerTwo;
-  }
-  
-  public String getActivePlayer() { 
-    return activePlayer;
-  }
-
-  public Iterator<Side> getSides() {
-    return board.iterator();
-  }
-  
   /**
    * Make a play on player's side, taken from the given index.
    * Updates the board with the new pit contents.
@@ -65,18 +43,17 @@ public class GravaHal extends Model {
         currentSide = getNextSide(currentSide);   
         result = currentSide.sowFrom(result.getInHand(), 0, currentSide == playerSide);
       }
-      
       activePlayer = changePlayer(result);
     }
   }
 
   public boolean canPlay(String player, int pitIndex) {
     Side side = getPlayerSide(player);
-    return player.equals(activePlayer) && side.getPitContents(pitIndex) > 0;
+    return player.equals(activePlayer) && side.isNotEmpty(pitIndex);
   }
 
   private String changePlayer(TurnResult turnResult) {
-    if (turnResult.getLastPit().isGravaHalPit()) {
+    if (turnResult.getInGravaHal()) {
       return activePlayer;
     }
     else {
@@ -114,5 +91,21 @@ public class GravaHal extends Model {
     board = new ArrayList<Side>();
     board.add(new Side("One"));
     board.add(new Side("Two"));
+  }
+  
+  public String getGameId() {
+    return gameId;
+  }
+  
+  public String getPlayerOne() {
+    return playerOne;
+  }
+  
+  public String getPlayerTwo() {
+    return playerTwo;
+  }
+  
+  public String getActivePlayer() { 
+    return activePlayer;
   }
 }
